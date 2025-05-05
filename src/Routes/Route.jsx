@@ -12,19 +12,19 @@ const Route = () => {
       children: [
         { index: true, element: <Home /> },
         {
-          path: "/home",
+          path: "home",
           element: <Home />,
         },
         {
-          path: "/about",
+          path: "about",
           element: <About />,
         },
         {
-          path: "/menu",
+          path: "menu",
           element: <Menu />,
         },
         {
-          path: "/cart",
+          path: "cart",
           element: <AddToCart />,
         },
       ],
