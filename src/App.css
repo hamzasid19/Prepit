@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+body {
+  background-image: url("./assets/homebg.png");
+  background-size: cover;
+  font-family: "Outfit", sans-serif;
+}
