@@ -10,7 +10,7 @@ import Accordiion from "../Components/Accordiion";
 const Menu = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [filterOpen, setFilterOpen] = React.useState(false);
-
+  const [meal, setMeal] = React.useState(4);
   const handleOpen = () => setIsOpen((open) => !open);
   const handleFilterOpen = () => setFilterOpen((open) => !open);
   return (
@@ -18,7 +18,7 @@ const Menu = () => {
       <Container extraClasses=" py-10 relative">
         <div className="flex flex-wrap items-center justify-between gap-8 sm:flex-nowrap">
           {MenuMealData.map((item) => (
-            <MenuMeal key={item.id} data={item} />
+            <MenuMeal data={item} setMeal={setMeal} meal={meal} />
           ))}
         </div>
 
@@ -54,7 +54,7 @@ const Menu = () => {
           <div className="flex flex-col items-center gap-4 py-1 sm:flex-row">
             <div className="h-10 w-full grow-1 rounded-4xl border border-white sm:w-auto"></div>
             <div className="rounded-4xl bg-white px-5 py-2.5 text-black">
-              0/12 Meals
+              0/{meal === 4 ? "4" : meal === 6 ? "6" : "8"} Meals
             </div>
           </div>
         </div>

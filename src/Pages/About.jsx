@@ -3,6 +3,7 @@ import aboutbg from "../assets/about/aboutbg.png";
 import aboutmain from "../assets/about/aboutmain.png";
 import Container from "../Components/Container";
 import Button from "../Components/Button";
+import Input from "../Components/Input";
 const About = () => {
   return (
     <section className="bg-white">
@@ -183,18 +184,22 @@ const About = () => {
                 <p htmlFor="" className="text-base font-semibold text-black">
                   First Name
                 </p>
-                <input
+                <Input
                   type="text"
-                  className="w-full rounded-4xl border border-gray-400 p-2 text-black"
+                  placeholder="First Name"
+                  borderVariant="gray"
+                  extraClasses="p-2"
                 />
               </div>
               <div>
                 <p htmlFor="" className="text-base font-semibold text-black">
                   Last Name
                 </p>
-                <input
+                <Input
                   type="text"
-                  className="w-full rounded-4xl border border-gray-400 p-2 text-black"
+                  placeholder="Last Name"
+                  borderVariant="gray"
+                  extraClasses="p-2"
                 />
               </div>
 
@@ -202,9 +207,11 @@ const About = () => {
                 <p htmlFor="" className="text-base font-semibold text-black">
                   E-Mail
                 </p>
-                <input
+                <Input
                   type="email"
-                  className="w-full rounded-4xl border border-gray-400 p-2 text-black"
+                  placeholder="Email"
+                  borderVariant="gray"
+                  extraClasses="p-2"
                 />
               </div>
 
@@ -212,9 +219,11 @@ const About = () => {
                 <p htmlFor="" className="text-base font-semibold text-black">
                   Phone Number
                 </p>
-                <input
+                <Input
                   type="text"
-                  className="w-full rounded-4xl border border-gray-400 p-2 text-black"
+                  placeholder="Number"
+                  borderVariant="gray"
+                  extraClasses="p-2"
                 />
               </div>
 

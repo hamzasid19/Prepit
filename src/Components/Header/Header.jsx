@@ -136,7 +136,13 @@ const Header = () => {
             </li>
           </ul>
           <div className="flex items-center justify-between py-2">
-            <img className="w-24 sm:w-auto" src={logo} alt="" />
+            <NavLink to="/">
+              <img
+                className="w-24 cursor-pointer sm:w-auto"
+                src={logo}
+                alt=""
+              />
+            </NavLink>
             <p
               onClick={handleOpen}
               className="block cursor-pointer text-3xl md:hidden"
@@ -152,7 +158,7 @@ const Header = () => {
                     isActive ? "text-orange-400" : "text-white"
                   }`
                 }
-                to="/home"
+                to="/"
                 onClick={() => setIsOpen(false)}
               >
                 Home
@@ -206,7 +212,7 @@ const Header = () => {
                   </g>
                 </svg>
               </NavLink>
-              <NavLink to="/">
+              <NavLink to="/register">
                 <svg
                   className="w-5"
                   viewBox="0 0 24 24"

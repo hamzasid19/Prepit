@@ -1,31 +1,46 @@
 import React from "react";
 
-const Button = ({ variant, text, extraClasses, bgVariant }) => {
+const Button = ({
+  variant,
+  text,
+  extraClasses,
+  bgVariant,
+  children,
+  handleClick,
+  id,
+}) => {
   return (
     <>
       {variant === "primary" ? (
         <button
-          className={`cursor-pointer rounded-[80px] border border-white bg-[#171717]/70 text-2xl text-white ${extraClasses}`}
+          className={`cursor-pointer rounded-[80px] border border-white bg-[#171717]/70 text-2xl text-white duration-300 hover:bg-white hover:text-black ${extraClasses}`}
+          onClick={handleClick ? handleClick : null}
         >
           {text}
         </button>
       ) : variant === "secondary" ? (
         <button
-          className={`cursor-pointer text-xl ${
-            bgVariant === "white" ? "text-black" : "text-white"
-          } text-black} rounded-[80px] ${
-            bgVariant === "white" ? "bg-white" : "bg-black"
+          className={`cursor-pointer rounded-[80px] border text-xl ${
+            bgVariant === "white"
+              ? "border-white bg-white text-black duration-300 hover:bg-transparent hover:text-white"
+              : bgVariant === "black"
+                ? "border-black bg-black text-white duration-300 hover:bg-white hover:text-black"
+                : ""
           } ${extraClasses}`}
+          onClick={handleClick ? handleClick : null}
         >
           {text}
         </button>
-      ) : variant === "tertiary" ? (
+      ) : (
         <button
-          className={`cursor-pointer rounded-lg bg-black text-2xl text-white ${extraClasses}`}
+          id={id}
+          className={`cursor-pointer ${extraClasses}`}
+          onClick={handleClick ? handleClick : null}
         >
           {text}
+          {children}
         </button>
-      ) : null}
+      )}
     </>
   );
 };
