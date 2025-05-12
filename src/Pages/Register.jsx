@@ -1,4 +1,3 @@
-import React from "react";
 import Container from "../Components/Container";
 import logo from "../assets/logo.png";
 import loginImg from "../assets/login.png";
@@ -68,6 +67,12 @@ const Register = () => {
             bgVariant={"white"}
             extraClasses={"py-2"}
           />
+          <p className="text-base text-gray-600">
+            Already have an account{" "}
+            <NavLink className="text-blue-500" to="/login">
+              Login
+            </NavLink>{" "}
+          </p>
         </form>
         <img className="order-1 lg:order-2" src={loginImg} alt="" />
       </section>
