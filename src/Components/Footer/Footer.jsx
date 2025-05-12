@@ -1,9 +1,9 @@
-import React from "react";
 import Container from "../Container";
 import logo from "../../assets/logo.png";
 import footer from "../../assets/footer.png";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { NavLink } from "react-router";
 const Footer = () => {
   return (
     <footer
@@ -22,9 +22,15 @@ const Footer = () => {
           <div className="space-y-4 text-center lg:text-left">
             <h1 className="font-bold">Quick Links</h1>
             <ul className="space-y-4">
-              <li>Menu Dropdown</li>
-              <li>Info Drodown</li>
-              <li>info</li>
+              <NavLink className="block" to={"/"}>
+                Home
+              </NavLink>
+              <NavLink className="block" to={"/about"}>
+                About
+              </NavLink>
+              <NavLink className="block" to={"/menu"}>
+                Menu
+              </NavLink>
             </ul>
           </div>
           <div className="space-y-4 text-center lg:text-left">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "../Components/Container";
 import MenuMealData from "../data/MenuMealData";
@@ -12,15 +12,16 @@ import FilterPopup from "../Components/Popups/FilterPopup";
 import { openFilterModal } from "../slices/modalSlice/filterModalSlice";
 
 const Menu = () => {
-  const { data: products, isLoading, isError } = useGetProductsQuery();
+  const [isFeature, setIsFeature] = useState("");
+  const { data: products, isLoading, isError } = useGetProductsQuery(isFeature);
+
   const dispatch = useDispatch();
-  const { openProductId } = useSelector((state) => state.modal);
-  const { openFilter } = useSelector((state) => state.filterModal);
-  const { cartItems } = useSelector((state) => state.cart);
-  const [meal, setMeal] = useState(4);
+  const { openProductId } = useSelector((store) => store.modal);
+  const { openFilter } = useSelector((store) => store.filterModal);
+  const { cartItems } = useSelector((store) => store.cart);
+  const { setMealQty } = useSelector((store) => store.mealQty);
 
   const cartItemsLength = cartItems.reduce((acc, item) => acc + item.qty, 0);
-  console.log(cartItemsLength);
 
   const bar = (value) => {
     if (cartItemsLength === 0) return "w-0";
@@ -84,7 +85,7 @@ const Menu = () => {
       <Container extraClasses=" py-10 relative">
         <div className="flex flex-wrap items-center justify-between gap-8 sm:flex-nowrap">
           {MenuMealData.map((item) => (
-            <MenuMeal data={item} setMeal={setMeal} meal={meal} />
+            <MenuMeal data={item} meal={setMealQty} />
           ))}
         </div>
 
@@ -99,16 +100,16 @@ const Menu = () => {
           <div className="flex flex-col items-center gap-4 py-1 sm:flex-row">
             <div className="h-10 w-full grow-1 rounded-4xl border border-white sm:w-auto">
               <div
-                className={`h-full ${bar(meal)} rounded-4xl bg-white transition-all duration-300`}
+                className={`h-full ${bar(setMealQty)} rounded-4xl bg-white transition-all duration-300`}
               ></div>
             </div>
             <div className="rounded-4xl bg-white px-5 py-2.5 text-black">
-              0/{meal === 4 ? "4" : meal === 6 ? "6" : "8"} Meals
+              0/{setMealQty === 4 ? "4" : setMealQty === 6 ? "6" : "8"} Meals
             </div>
           </div>
         </div>
 
-        <FilterPopup />
+        <FilterPopup isFeature={isFeature} setIsFeature={setIsFeature} />
 
         <div className="grid gap-4 sm:grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
           {products?.map((item) => (

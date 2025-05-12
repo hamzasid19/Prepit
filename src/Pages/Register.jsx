@@ -4,15 +4,43 @@ import loginImg from "../assets/login.png";
 import Button from "../Components/Button";
 import { NavLink } from "react-router";
 import Input from "../Components/Input";
+import { useState } from "react";
+
+import { useRegisterUserMutation } from "../slices/userSlice/userApiSlice";
 
 const Register = () => {
+  const [regData, setRegData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+
+  const [registerUser] = useRegisterUserMutation();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRegData({
+      ...regData,
+      [name]: value,
+    });
+    console.log(regData);
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    registerUser(regData);
+  };
   return (
     <Container extraClasses={"py-10"}>
       <NavLink to="/">
         <img src={logo} alt="" />
       </NavLink>
       <section className="grid grid-cols-1 place-items-center gap-2 pt-20 lg:grid-cols-2">
-        <form className="order-2 flex flex-col gap-4 space-y-2 px-8 lg:order-1 lg:px-0">
+        <form
+          onSubmit={handleRegister}
+          className="order-2 flex flex-col gap-4 space-y-2 px-8 lg:order-1 lg:px-0"
+        >
           <h1 className="text-center text-4xl font-semibold text-white lg:text-6xl">
             Create Your Account
           </h1>
@@ -25,7 +53,10 @@ const Register = () => {
           <div>
             <p className="pb-3 text-xl">First Name</p>
             <Input
+              data={regData.firstname}
               type="text"
+              name={"firstname"}
+              handleChange={handleChange}
               placeholder="First Name"
               borderVariant="black"
               extraClasses="p-4 "
@@ -35,6 +66,9 @@ const Register = () => {
           <div>
             <p className="pb-3 text-xl">Last Name</p>
             <Input
+              data={regData.lastname}
+              name={"lastname"}
+              handleChange={handleChange}
               type="text"
               placeholder="Last Name"
               borderVariant="black"
@@ -45,6 +79,9 @@ const Register = () => {
           <div>
             <p className="pb-3 text-xl">Email</p>
             <Input
+              data={regData.email}
+              name={"email"}
+              handleChange={handleChange}
               type="email"
               placeholder="Email"
               borderVariant="black"
@@ -55,6 +92,9 @@ const Register = () => {
           <div>
             <p className="pb-3 text-xl">Password</p>
             <Input
+              data={regData.password}
+              name={"password"}
+              handleChange={handleChange}
               type="password"
               placeholder="Password"
               borderVariant="black"

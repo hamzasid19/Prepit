@@ -23,7 +23,7 @@ const MenuCard = ({
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const handleOpen = (id) => dispatch(openProductModal(id));
-  const { openProductId } = useSelector((state) => state.modal);
+  const { openProductId } = useSelector((store) => store.modal);
 
   const addToCartHandler = () => {
     dispatch(
@@ -34,6 +34,7 @@ const MenuCard = ({
         price,
         countInStock,
         qty,
+        description,
       }),
     );
   };

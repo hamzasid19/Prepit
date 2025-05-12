@@ -5,7 +5,9 @@ body {
   background-size: cover;
   font-family: "Outfit", sans-serif;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 header svg {
   width: 1.25rem;
   height: 1.25rem;

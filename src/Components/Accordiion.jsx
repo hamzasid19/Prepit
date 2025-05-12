@@ -15,7 +15,7 @@ const Accordiion = ({ data }) => {
       </div>
 
       <div
-        className={`flex ${active ? "max-h-[500px] py-10" : "max-h-0"} w-full items-center justify-center overflow-hidden bg-gray-100 px-4 text-base transition-all duration-500 sm:text-xl`}
+        className={`flex ${active ? "max-h-[500px] py-10" : "max-h-0"} w-full items-center justify-center overflow-hidden bg-gray-100 px-4 text-base transition-all duration-300 sm:text-xl`}
       >
         {data.answer}
       </div>

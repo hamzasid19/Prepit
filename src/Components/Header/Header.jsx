@@ -10,7 +10,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { useSelector } from "react-redux";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((store) => store.cart);
   const handleOpen = () => {
     setIsOpen((open) => !open);
   };
@@ -90,7 +90,7 @@ const Header = () => {
               <NavLink to="/cart" className="relative">
                 <HiOutlineShoppingBag />
                 {cartItems.length > 0 && (
-                  <div className="absolute bottom-3 left-2 rounded-full bg-white px-2 py-0.5 text-xs text-black">
+                  <div className="text-semibold absolute bottom-3 left-2 rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">
                     {cartItems.reduce((acc, item) => acc + item.qty, 0)}
                   </div>
                 )}

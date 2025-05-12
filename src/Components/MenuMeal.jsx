@@ -1,17 +1,21 @@
 import React from "react";
 import Button from "./Button";
+import { useDispatch } from "react-redux";
+import { changeMealQty } from "../slices/mealSlice/mealSlice";
 
 const MenuMeal = ({ data, setMeal, meal }) => {
+  const dispatch = useDispatch();
   return (
     <Button
+      key={data.id}
       id={data.id}
       handleClick={
         data.id === 1
-          ? () => setMeal(4)
+          ? () => dispatch(changeMealQty(4))
           : data.id === 2
-            ? () => setMeal(6)
+            ? () => dispatch(changeMealQty(6))
             : data.id === 3
-              ? () => setMeal(8)
+              ? () => dispatch(changeMealQty(8))
               : null
       }
       extraClasses={`flex w-full items-center text-black duration-300 justify-between rounded-4xl 

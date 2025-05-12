@@ -1,4 +1,3 @@
-import React from "react";
 import homebg from "../assets/homebg.png";
 import homemain from "../assets/homemain.png";
 import Button from "../Components/Button";
@@ -14,6 +13,7 @@ import HomeChooseCard from "../Components/Cards/HomeChooseCard";
 import NutritionCard from "../Components/Cards/NutrtionCard";
 import nutritionData from "../data/NutritionData";
 import nutritionbg from "../assets/homenutrition/nutritionbg.png";
+import { NavLink } from "react-router";
 const Home = () => {
   return (
     <>
@@ -32,11 +32,13 @@ const Home = () => {
               enim ad minim veniam, quis nostrud exercitation laboris nisi ut
               aliquip.
             </p>
-            <Button
-              variant="primary"
-              text="Order Now"
-              extraClasses="py-3 px-6 text-xl"
-            />
+            <NavLink to="/menu">
+              <Button
+                variant="primary"
+                text="Order Now"
+                extraClasses="py-3 px-6 text-xl"
+              />
+            </NavLink>
           </div>
           <img src={homemain} alt="" className="lg:w-1/2" />
         </Container>

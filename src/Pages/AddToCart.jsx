@@ -1,11 +1,10 @@
-import React from "react";
 import Container from "../Components/Container";
-import cartimg from "../assets/Cart/cartimg.png";
 import Button from "../Components/Button";
-import CartData from "../data/CartData";
 import CartItem from "../Components/CartItem";
+import { useSelector } from "react-redux";
 
 const AddToCart = () => {
+  const { cartItems, itemsPrice } = useSelector((store) => store.cart);
   return (
     <section className="bg-white py-10">
       <Container>
@@ -17,10 +16,10 @@ const AddToCart = () => {
             <h1 className="text-lg font-semibold text-white">Price</h1>
           </div>
 
-          {CartData.map((item) => {
+          {cartItems.map((item) => {
             return (
               <div className="space-y-2">
-                <CartItem data={item} />
+                <CartItem {...item} />
               </div>
             );
           })}
@@ -29,19 +28,19 @@ const AddToCart = () => {
             <div className="grid grid-cols-[1fr_.8fr_.2fr]">
               <p className="text-xl font-bold text-black">Total:</p>
               <div></div>
-              <p className="text-xl text-black">€98.99</p>
+              <p className="text-xl text-black">${itemsPrice}</p>
             </div>
             <div className="grid grid-cols-[1fr_.8fr_.2fr]">
               <p className="text-xl font-bold text-black">Discount:</p>
               <div></div>
-              <p className="text-xl text-black">10%</p>
+              <p className="text-xl text-black">0%</p>
             </div>
           </div>
 
           <div className="grid grid-cols-[1fr_.8fr_.2fr] py-4">
             <p className="text-xl font-bold text-black">Sub Total:</p>
             <div></div>
-            <p className="text-xl text-black">€88.99</p>
+            <p className="text-xl text-black">${itemsPrice}</p>
           </div>
 
           <Button
