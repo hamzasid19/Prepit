@@ -9,6 +9,7 @@ const Button = ({
   handleClick,
   id,
   countInStock,
+  qtyLimit,
 }) => {
   return (
     <>
@@ -22,7 +23,7 @@ const Button = ({
         </button>
       ) : variant === "secondary" ? (
         <button
-          disabled={countInStock === 0}
+          disabled={countInStock === 0 ? true : false || qtyLimit}
           className={`cursor-pointer rounded-[80px] border text-xl ${
             bgVariant === "white"
               ? "border-white bg-white text-black duration-300 hover:bg-transparent hover:text-white disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-black"
@@ -36,7 +37,6 @@ const Button = ({
         </button>
       ) : (
         <button
-          disabled={countInStock === 0}
           id={id}
           className={`cursor-pointer ${extraClasses}`}
           onClick={handleClick ? handleClick : null}

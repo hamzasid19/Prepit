@@ -24,6 +24,11 @@ const MenuCard = ({
   const dispatch = useDispatch();
   const handleOpen = (id) => dispatch(openProductModal(id));
   const { openProductId } = useSelector((store) => store.modal);
+  const { setMealQty } = useSelector((store) => store.mealQty);
+  const { cartItems } = useSelector((store) => store.cart);
+
+  const cartQty = cartItems.reduce((acc, item) => acc + item.qty, 0);
+  let qtyLimit = setMealQty === cartQty;
 
   const addToCartHandler = () => {
     dispatch(
@@ -76,6 +81,7 @@ const MenuCard = ({
             {name} ({weight}g)
           </h1>
           <Button
+            qtyLimit={qtyLimit}
             countInStock={countInStock}
             variant="secondary"
             bgVariant="black"

@@ -4,11 +4,18 @@ import loginImg from "../assets/login.png";
 import Button from "../Components/Button";
 import { NavLink } from "react-router";
 import Input from "../Components/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useRegisterUserMutation } from "../slices/userSlice/userApiSlice";
+import { useDispatch } from "react-redux";
+import { clearFeature } from "../slices/productSlice/productFeatureSlice";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(clearFeature());
+  }, []);
+
   const [regData, setRegData] = useState({
     firstname: "",
     lastname: "",

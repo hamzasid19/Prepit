@@ -1,9 +1,19 @@
 import Container from "../Components/Container";
 import Button from "../Components/Button";
 import CartItem from "../Components/CartItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { clearFeature } from "../slices/productSlice/productFeatureSlice";
+import { useEffect } from "react";
 
 const AddToCart = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearFeature());
+  }, []);
+
+  const navigate = useNavigate();
   const { cartItems, itemsPrice } = useSelector((store) => store.cart);
   return (
     <section className="bg-white py-10">
@@ -16,13 +26,11 @@ const AddToCart = () => {
             <h1 className="text-lg font-semibold text-white">Price</h1>
           </div>
 
-          {cartItems.map((item) => {
-            return (
-              <div className="space-y-2">
-                <CartItem {...item} />
-              </div>
-            );
-          })}
+          <div className="space-y-2">
+            {cartItems.map((item) => {
+              return <CartItem {...item} />;
+            })}
+          </div>
 
           <div className="space-y-4 border-t border-b border-gray-300 py-2">
             <div className="grid grid-cols-[1fr_.8fr_.2fr]">
@@ -44,6 +52,7 @@ const AddToCart = () => {
           </div>
 
           <Button
+            handleClick={() => navigate("/checkout")}
             variant="secondary"
             text="Buy Now"
             bgVariant={"black"}

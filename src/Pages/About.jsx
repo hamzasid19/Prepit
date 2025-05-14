@@ -1,4 +1,5 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import aboutbg from "../assets/about/aboutbg.png";
 import aboutmain from "../assets/about/aboutmain.png";
 import Container from "../Components/Container";
@@ -6,7 +7,14 @@ import Button from "../Components/Button";
 import Input from "../Components/Input";
 import { FaLocationDot, FaPhone } from "react-icons/fa6";
 import { HiMail } from "react-icons/hi";
+import { clearFeature } from "../slices/productSlice/productFeatureSlice";
 const About = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearFeature());
+  }, []);
+
   return (
     <section className="bg-white">
       <div

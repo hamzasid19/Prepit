@@ -17,9 +17,10 @@ const SettingIcon = () => {
   );
 };
 
-const BestSellerIcon = () => {
+const BestSellerIcon = ({ fill }) => {
   return (
     <svg
+      fill={fill}
       width={"15"}
       xmlns="http://www.w3.org/2000/svg"
       shapeRendering="geometricPrecision"

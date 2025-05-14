@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "../Components/Container";
 import MenuMealData from "../data/MenuMealData";
@@ -10,10 +9,16 @@ import { SettingIcon } from "../Components/Icons";
 import { useGetProductsQuery } from "../slices/productSlice/productSlice";
 import FilterPopup from "../Components/Popups/FilterPopup";
 import { openFilterModal } from "../slices/modalSlice/filterModalSlice";
+import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
+import Button from "../Components/Button";
 
 const Menu = () => {
-  const [isFeature, setIsFeature] = useState("");
-  const { data: products, isLoading, isError } = useGetProductsQuery(isFeature);
+  const { setFeature } = useSelector((store) => store.feature);
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useGetProductsQuery(setFeature);
 
   const dispatch = useDispatch();
   const { openProductId } = useSelector((store) => store.modal);
@@ -104,19 +109,29 @@ const Menu = () => {
               ></div>
             </div>
             <div className="rounded-4xl bg-white px-5 py-2.5 text-black">
-              0/{setMealQty === 4 ? "4" : setMealQty === 6 ? "6" : "8"} Meals
+              {cartItems.reduce((acc, item) => acc + item.qty, 0)}/
+              {setMealQty === 4 ? "4" : setMealQty === 6 ? "6" : "8"} Meals
             </div>
           </div>
         </div>
 
-        <FilterPopup isFeature={isFeature} setIsFeature={setIsFeature} />
+        <FilterPopup />
 
         <div className="grid gap-4 sm:grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
           {products?.map((item) => (
             <MenuCard key={item._id} {...item} />
           ))}
         </div>
+        <div className="mt-4 flex items-center justify-center gap-2">
+          <Button extraClasses={"cursor-pointer text-black"}>
+            <CgChevronLeft />
+          </Button>
 
+          <p className="text-black">1</p>
+          <Button extraClasses={"cursor-pointer text-black"}>
+            <CgChevronRight />
+          </Button>
+        </div>
         <div>
           <div className="py-20 text-center text-black">
             <h1 className="inline rounded-4xl bg-black px-4 py-1 text-white">

@@ -1,7 +1,22 @@
-import React from "react";
 import Button from "../Button";
-
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { changeMealQty } from "../../slices/mealSlice/mealSlice";
 const HomeChooseCard = ({ data }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    if (data.id === 1) {
+      dispatch(changeMealQty(4));
+    }
+    if (data.id === 2) {
+      dispatch(changeMealQty(6));
+    }
+    if (data.id === 3) {
+      dispatch(changeMealQty(8));
+    }
+    navigate("/menu");
+  };
   return (
     <div id={data.id} className={`grid-rows-auto relative grid`}>
       <div className="h-[140px]"></div>
@@ -16,6 +31,7 @@ const HomeChooseCard = ({ data }) => {
         <h1 className="self-end text-2xl font-bold">{data.title}</h1>
         <p className="self-start text-xl">{data.description}</p>
         <Button
+          handleClick={handleClick}
           text={data.btnText}
           variant="secondary"
           bgVariant="white"

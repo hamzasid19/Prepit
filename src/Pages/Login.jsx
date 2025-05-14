@@ -2,12 +2,23 @@ import Container from "../Components/Container";
 import logo from "../assets/logo.png";
 import loginImg from "../assets/login.png";
 import Button from "../Components/Button";
-import { Navigate, NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Input from "../Components/Input";
 import { useLoginUserMutation } from "../slices/userSlice/userApiSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../slices/userSlice/authSlice";
+import { toast } from "react-toastify";
+import { clearFeature } from "../slices/productSlice/productFeatureSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearFeature());
+  }, []);
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -21,10 +32,16 @@ const Login = () => {
     });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    loginUser(loginData);
-    <Navigate to="/" />;
+    try {
+      await loginUser(loginData).unwrap();
+      dispatch(setCredentials(loginData));
+    } catch (error) {
+      toast.error(error?.data?.message);
+      return;
+    }
+    navigate("/");
   };
   return (
     <Container extraClasses={"py-10"}>

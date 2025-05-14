@@ -7,14 +7,22 @@ import FactorCard from "../Components/Cards/FactorCard";
 import homemenubg from "../assets/homemenu/homemenubg.png";
 import HomeMenuCard from "../Components/Cards/HomeMenuCard";
 import menuData from "../data/HomeMenuData";
-import chooseData from "../data/HomeCHooseData";
+import chooseData from "../data/HomeChooseData";
 import homechoosebg from "../assets/homechoose/homechoosebg.png";
 import HomeChooseCard from "../Components/Cards/HomeChooseCard";
 import NutritionCard from "../Components/Cards/NutrtionCard";
 import nutritionData from "../data/NutritionData";
 import nutritionbg from "../assets/homenutrition/nutritionbg.png";
 import { NavLink } from "react-router";
+import { useDispatch } from "react-redux";
+import { clearFeature } from "../slices/productSlice/productFeatureSlice";
+import { useEffect } from "react";
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearFeature());
+  }, []);
   return (
     <>
       <section

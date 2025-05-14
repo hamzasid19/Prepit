@@ -4,8 +4,8 @@ import { apiSlice } from "../apiSlice";
 export const productSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: (feature) => ({
-        url: `${PRODUCT_URL}${feature ? `?features=${feature}` : ""}`,
+      query: (feature, page) => ({
+        url: `${PRODUCT_URL}${feature.length > 0 ? `?features=${feature}&page=${page || 1}` : `?page=${page || 1}`}`,
       }),
       keepUnusedDataFor: 5,
     }),

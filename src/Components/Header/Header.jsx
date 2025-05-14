@@ -1,18 +1,35 @@
 import { useState } from "react";
 import Container from "../Container";
 import logo from "../../assets/logo.png";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import headerbg from "../../assets/headerbg.png";
 import { LuBicepsFlexed } from "react-icons/lu";
 import { FaRegSnowflake, FaRegUser } from "react-icons/fa6";
-import { CiMemoPad } from "react-icons/ci";
+import { CiLogout, CiMemoPad } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeCredentials } from "../../slices/userSlice/authSlice";
+import { useLogoutUserMutation } from "../../slices/userSlice/userApiSlice";
+import { toast } from "react-toastify";
+
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const { cartItems } = useSelector((store) => store.cart);
+  const { userInfo } = useSelector((store) => store.auth);
+  const [logoutApiCall] = useLogoutUserMutation();
   const handleOpen = () => {
     setIsOpen((open) => !open);
+  };
+  const handleLogout = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(removeCredentials());
+      navigate("/login");
+    } catch (error) {
+      toast.error(error?.data?.message);
+    }
   };
   return (
     <div
@@ -95,9 +112,13 @@ const Header = () => {
                   </div>
                 )}
               </NavLink>
-              <NavLink to="/register">
-                <FaRegUser />
-              </NavLink>
+              {userInfo ? (
+                <CiLogout className="cursor-pointer" onClick={handleLogout} />
+              ) : (
+                <NavLink to="/register">
+                  <FaRegUser />
+                </NavLink>
+              )}
             </div>
           </div>
         </Container>

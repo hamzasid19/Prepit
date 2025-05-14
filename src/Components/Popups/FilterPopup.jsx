@@ -14,10 +14,12 @@ import { FaTintSlash } from "react-icons/fa";
 import { BestSellerIcon } from "../Icons";
 import { useDispatch, useSelector } from "react-redux";
 import { closeFilterModal } from "../../slices/modalSlice/filterModalSlice";
+import { productFeature } from "../../slices/productSlice/productFeatureSlice";
 
 const FilterPopup = ({ isFeature, setIsFeature }) => {
   const dispatch = useDispatch();
   const { openFilter } = useSelector((store) => store.filterModal);
+  const { setFeature } = useSelector((store) => store.feature);
 
   return (
     <div
@@ -35,38 +37,20 @@ const FilterPopup = ({ isFeature, setIsFeature }) => {
 
       <div className="space-y-2">
         <button
-          onClick={() =>
-            setIsFeature((prev) =>
-              prev.includes("MuscleBuilding")
-                ? prev.filter((item) => item !== "MuscleBuilding")
-                : [...prev, "MuscleBuilding"],
-            )
-          }
-          className={`${isFeature.includes("MuscleBuilding") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+          onClick={() => dispatch(productFeature("MuscleBuilding"))}
+          className={`${setFeature.includes("MuscleBuilding") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
         >
           Muscle Building <LuBicepsFlexed />
         </button>
         <button
-          onClick={() =>
-            setIsFeature((prev) =>
-              prev.includes("Slimming")
-                ? prev.filter((item) => item !== "Slimming")
-                : [...prev, "Slimming"],
-            )
-          }
-          className={`${isFeature.includes("Slimming") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+          onClick={() => dispatch(productFeature("Slimming"))}
+          className={`${setFeature.includes("Slimming") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
         >
           Slimming <PiSpeedometerLight />
         </button>
         <button
-          onClick={() =>
-            setIsFeature((prev) =>
-              prev.includes("Bulking")
-                ? prev.filter((item) => item !== "Bulking")
-                : [...prev, "Bulking"],
-            )
-          }
-          className={`${isFeature.includes("Bulking") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+          onClick={() => dispatch(productFeature("Bulking"))}
+          className={`${setFeature.includes("Bulking") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
         >
           Bulking <TbHeartCheck />
         </button>
@@ -76,38 +60,20 @@ const FilterPopup = ({ isFeature, setIsFeature }) => {
         <h2 className="mb-6 text-xl font-bold sm:text-4xl">Protein source</h2>
         <div className="space-y-2">
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("Chicken")
-                  ? prev.filter((item) => item !== "Chicken")
-                  : [...prev, "Chicken"],
-              )
-            }
-            className={`${isFeature.includes("Chicken") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("Chicken"))}
+            className={`${setFeature.includes("Chicken") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Chicken <GiChickenOven />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("Beef")
-                  ? prev.filter((item) => item !== "Beef")
-                  : [...prev, "Beef"],
-              )
-            }
-            className={`${isFeature.includes("Beef") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("Beef"))}
+            className={`${setFeature.includes("Beef") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Beef <LuBeef />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("Salmon")
-                  ? prev.filter((item) => item !== "Salmon")
-                  : [...prev, "Salmon"],
-              )
-            }
-            className={`${isFeature.includes("Salmon") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("Salmon"))}
+            className={`${setFeature.includes("Salmon") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Salmon <GiSalmon />
           </button>
@@ -118,86 +84,44 @@ const FilterPopup = ({ isFeature, setIsFeature }) => {
         <h2 className="mb-6 text-xl font-bold sm:text-4xl">Preferences</h2>
         <div className="space-y-2">
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("Snacks")
-                  ? prev.filter((item) => item !== "Snacks")
-                  : [...prev, "Snacks"],
-              )
-            }
-            className={`${isFeature.includes("Snacks") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("Snacks"))}
+            className={`${setFeature.includes("Snacks") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Snacks <FaPlateWheat />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("LowCarb")
-                  ? prev.filter((item) => item !== "LowCarb")
-                  : [...prev, "LowCarb"],
-              )
-            }
-            className={`${isFeature.includes("LowCarb") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("LowCarb"))}
+            className={`${setFeature.includes("LowCarb") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Low carb <LuWheat />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("GlutenFree")
-                  ? prev.filter((item) => item !== "GlutenFree")
-                  : [...prev, "GlutenFree"],
-              )
-            }
-            className={`${isFeature.includes("GlutenFree") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("GlutenFree"))}
+            className={`${setFeature.includes("GlutenFree") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Gluten Free <LuWheatOff />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("LactoseFree")
-                  ? prev.filter((item) => item !== "LactoseFree")
-                  : [...prev, "LactoseFree"],
-              )
-            }
-            className={`${isFeature.includes("LactoseFree") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("LactoseFree"))}
+            className={`${setFeature.includes("LactoseFree") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Lactose Free <LuMilkOff />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("LowFat")
-                  ? prev.filter((item) => item !== "LowFat")
-                  : [...prev, "LowFat"],
-              )
-            }
-            className={`${isFeature.includes("LowFat") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("LowFat"))}
+            className={`${setFeature.includes("LowFat") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             Low Fat <FaTintSlash />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("BestSeller")
-                  ? prev.filter((item) => item !== "BestSeller")
-                  : [...prev, "BestSeller"],
-              )
-            }
-            className={`${isFeature.includes("Bestseller") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("BestSeller"))}
+            className={`${setFeature.includes("BestSeller") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
-            Bestseller <BestSellerIcon />
+            Bestseller <BestSellerIcon style={{ isFeature }} />
           </button>
           <button
-            onClick={() =>
-              setIsFeature((prev) =>
-                prev.includes("keto")
-                  ? prev.filter((item) => item !== "keto")
-                  : [...prev, "keto"],
-              )
-            }
-            className={`${isFeature.includes("keto") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
+            onClick={() => dispatch(productFeature("keto"))}
+            className={`${setFeature.includes("keto") ? "bg-black text-white" : "bg-white text-black"} flex cursor-pointer items-center justify-between gap-2 rounded-xl border px-4 py-2 text-left`}
           >
             keto <GiAvocado />
           </button>
