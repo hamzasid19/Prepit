@@ -10,6 +10,7 @@ const Button = ({
   id,
   countInStock,
   qtyLimit,
+  disableValue,
 }) => {
   return (
     <>
@@ -37,8 +38,9 @@ const Button = ({
         </button>
       ) : (
         <button
+          disabled={disableValue}
           id={id}
-          className={`cursor-pointer ${extraClasses}`}
+          className={`cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${extraClasses}`}
           onClick={handleClick ? handleClick : null}
         >
           {text}

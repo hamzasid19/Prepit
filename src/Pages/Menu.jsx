@@ -11,15 +11,16 @@ import FilterPopup from "../Components/Popups/FilterPopup";
 import { openFilterModal } from "../slices/modalSlice/filterModalSlice";
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
 import Button from "../Components/Button";
+import ScrollToTop from "../Utils/ScrollToTop";
+import { useEffect, useRef, useState } from "react";
 
 const Menu = () => {
-  const { setFeature } = useSelector((store) => store.feature);
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useGetProductsQuery(setFeature);
-
+  const feature = useSelector((store) => store.feature.setFeature);
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isError } = useGetProductsQuery({ feature, page });
+  const products = data?.products;
+  const totalProducts = data?.total;
+  const totalPages = data?.pages;
   const dispatch = useDispatch();
   const { openProductId } = useSelector((store) => store.modal);
   const { openFilter } = useSelector((store) => store.filterModal);
@@ -84,7 +85,9 @@ const Menu = () => {
 
     return "w-0";
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 200);
+  }, [page]);
   return (
     <section className="bg-white">
       <Container extraClasses=" py-10 relative">
@@ -122,16 +125,30 @@ const Menu = () => {
             <MenuCard key={item._id} {...item} />
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-center gap-2">
-          <Button extraClasses={"cursor-pointer text-black"}>
-            <CgChevronLeft />
-          </Button>
+        {totalProducts > 9 && (
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <Button
+              disableValue={page === 1}
+              handleClick={() => {
+                setPage((x) => x - 1);
+              }}
+              extraClasses={"cursor-pointer text-black"}
+            >
+              <CgChevronLeft />
+            </Button>
+            <p className="text-black">{page}</p>
+            <Button
+              disableValue={totalPages === page}
+              handleClick={() => {
+                setPage((x) => x + 1);
+              }}
+              extraClasses={"cursor-pointer text-black"}
+            >
+              <CgChevronRight />
+            </Button>
+          </div>
+        )}
 
-          <p className="text-black">1</p>
-          <Button extraClasses={"cursor-pointer text-black"}>
-            <CgChevronRight />
-          </Button>
-        </div>
         <div>
           <div className="py-20 text-center text-black">
             <h1 className="inline rounded-4xl bg-black px-4 py-1 text-white">
