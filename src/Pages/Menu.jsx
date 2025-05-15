@@ -11,8 +11,7 @@ import FilterPopup from "../Components/Popups/FilterPopup";
 import { openFilterModal } from "../slices/modalSlice/filterModalSlice";
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
 import Button from "../Components/Button";
-import ScrollToTop from "../Utils/ScrollToTop";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Menu = () => {
   const feature = useSelector((store) => store.feature.setFeature);
